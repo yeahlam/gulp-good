@@ -1,3 +1,4 @@
+
 var gulp = require('gulp');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
@@ -14,6 +15,8 @@ var reload = browserSync.reload;
 var rev = require('gulp-rev');
 var revCollector = require('gulp-rev-collector');
 var runSequence = require('run-sequence');
+var cssAutoPerfix=require('gulp-autoprefixer')
+var gulpif=require('gulp-if')
 
 var build = {
 	basePath:'./build/',
@@ -27,8 +30,14 @@ var src = {
 	css:'./src/css/',
 	images: './src/images/',
 	js:'./src/js/',
-	less:'./src/less/'
+	less:'./src/less/',
+	minijs:'./src/minijs/'
 };
+
+var ifcombinejs=false; //是否合并JS
+var ifcombindcss=false;//是否合并CSS
+var ifmakeSpriter=false;//是否制作雪碧图
+var ifrev=false;//是否打开版本管理
 
 
 /*************************开发模式*************************/
@@ -71,18 +80,20 @@ gulp.task('less', function(){
 		}))
 
 });
-
+/^(?!.+\.min.js$).+\.js$/
 gulp.task('css:dev',function(){
-	gulp.src([src.css + '*.css', '!'+src.css +'all.min.css', '!'+src.css +'all.css'])
-		.pipe(concat('all.css'))
-		.pipe(spriter({
-           'spriteSheet': src.images+'spritesheet.png',
-           'pathToSpriteSheetFromCSS': '../images/spritesheet.png'
-       	}))
-       	.pipe(gulp.dest(src.css)) //输出一个未压缩版本
+	gulp.src([src.css + '*.css', '!'+src.css +'*.min.css', '!'+src.css +'all.min.css', '!'+src.css +'all.css'])
+		.pipe(gulpif(ifcombindcss,concat('all.css')))
+			.pipe(gulpif(ifmakeSpriter,spriter({
+				'spriteSheet': src.images+'spritesheet.png',
+				'pathToSpriteSheetFromCSS': '../images/spritesheet.png'
+				})))
+		.pipe(cssAutoPerfix())
+		.pipe(gulp.dest(src.css)) //输出一个未压缩版本
 
        	.pipe(cleanCss())
-       	.pipe(rename('./all.min.css'))
+		   .pipe(gulpif(ifcombindcss,rename('./all.min.css')))
+		   .pipe(gulpif(!ifcombindcss,rename({suffix:'.min'})))
        	.pipe(gulp.dest(src.css))//输出一个压缩版本
 		.pipe(reload({
 			stream:true
@@ -90,16 +101,17 @@ gulp.task('css:dev',function(){
 });
 
 gulp.task('js:dev',function(){
-	gulp.src([src.js+'*.js' , '!' + src.js + 'all.js', '!'+ src.js + 'all.min.js'])
+	gulp.src([src.js+'*.js','!'+src.js +'*.min.js' , '!' + src.js + 'all.js', '!'+ src.js + 'all.min.js'])
 		.pipe(babel({
             presets: ['es2015']
         }))
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest(src.js)) //输出一个未压缩版本
+		.pipe(gulpif(ifcombinejs,concat('all.js')))
+        //.pipe(gulp.dest(src.js)) //输出一个未压缩版本
         .pipe(uglify())  
-        .pipe(rename('./all.min.js'))
-        .pipe(gulp.dest(src.js))//输出一个压缩版本
-
+		.pipe(gulpif(ifcombinejs,rename('./all.min.js')))
+		.pipe(gulpif(!ifcombinejs,rename({suffix:'.min'})))
+		.pipe(gulp.dest(src.js))//输出一个压缩版本
+		
         .pipe(reload({
         	stream:true
         }))
@@ -132,19 +144,32 @@ gulp.task('publish:html',function(){
 });
 
 gulp.task('publish:css',function(){
-	gulp.src(src.css + 'all.min.css')
-		.pipe(rev())  //发布新版本
+	if(ifcombindcss){
+		gulp.src(src.css + 'all.min.css')
+		.pipe(gulpif(ifrev,rev()))  //发布新版本
 		.pipe(gulp.dest(build.css))
-		.pipe(rev.manifest())
-		.pipe(gulp.dest('./rev/css/'))
+		.pipe(gulpif(ifrev,rev.manifest()))
+		.pipe(gulpif(ifrev,gulp.dest('./rev/css/')))
+	}else{
+		gulp.src([src.css+'*.css' , '!' + src.css + 'all.css', '!'+ src.css + 'all.min.css'])
+		.pipe(gulp.dest(build.css))
+	}
+	
 });
 
 gulp.task('publish:js',function(){
-	gulp.src(src.js + 'all.min.js')
-		.pipe(rev())  //发布新版本
+	if(ifcombinejs){
+		gulp.src(src.js + 'all.min.js')
+		.pipe(gulpif(ifrev,rev()) ) //发布新版本
 		.pipe(gulp.dest(build.js))
-		.pipe(rev.manifest())
-		.pipe(gulp.dest('./rev/js/'))
+		.pipe(gulpif(ifrev,rev.manifest()))
+		.pipe(gulpif(ifrev,gulp.dest('./rev/js/')))
+	}else{
+		gulp.src([src.js+'*.js' , '!' + src.js + 'all.js', '!'+ src.js + 'all.min.js'])
+		.pipe(gulp.dest(build.js))
+	}
+	
+		
 });
 
 
