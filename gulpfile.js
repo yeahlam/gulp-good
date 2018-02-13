@@ -43,7 +43,7 @@ var ifrev=false;//是否打开版本管理
 /*************************开发模式*************************/
 
 // 开发模式下静态服务器
-gulp.task('server:dev', function() {
+gulp.task('server:d', function() {
     browserSync.init({
         server: {
             baseDir: src.basePath,
@@ -120,8 +120,8 @@ gulp.task('js:dev',function(){
 
 /*************************生成模式*************************/
 //生产模式下的服务器
-gulp.task('server:product', function() {
-	runSequence(['imagesmin','publish:html','publish:css','publish:js'], 'rev');
+gulp.task('server:p', function() {
+	runSequence(['imagesmin','publish:html','publish:css','publish:js']);
 	browserSync.init({
 	    server: {
 	        baseDir: build.basePath,
