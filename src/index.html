@@ -1,80 +1,153 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>宝马</title>
-<meta name="keywords" content="关键字,关键字,关键字" />
-<meta name="description" content="描述。……" />
-<meta name="Author" content="YangMing_gz ">
-</head>
-<body>
-<script src="//js.3conline.com/min/temp/v1/lib-jquery1.10.2.js"></script>
-<!-- <script type="text/javascript" src = "https://play9.pcauto.com.cn/auto180116/action/count.jsp"></script> -->
-<script src="http://js.3conline.com/min2/temp/v2/plugin-location2.js" charset="utf-8"></script>
-<script type="text/javascript">
-var comm = {
-	setCookie : function(name,value,allPath,day){
-		var Days = day||30;
-		var exp = new Date();
-		exp.setTime(exp.getTime() + Days*24*60*60*1000);
-		document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-		if(allPath == 1){
-			document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+ ";path=/";
-		}
-	},
-	getCookie : function(name){
-		var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-		if(arr=document.cookie.match(reg))
-		return unescape(arr[2]);
-		else
-		return null;
-	},
-	delCookie : function(name,allPath){
-	 var exp = new Date();
-	 exp.setTime(exp.getTime() - 1);
-	 var cval=this.getCookie(name);
-	 if(cval!=null)
-	 	document.cookie= name + "="+cval+";expires="+exp.toGMTString();
-	 if(allPath == 1){
-	 	document.cookie= name + "="+cval+";expires="+exp.toGMTString()+ ";path=/";
-	 }
-	}
-};
 
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<meta content="always" name="referrer">
 
-Array.prototype.in_array = function(e){
-	for(i=0;i<this.length;i++){
-		if(this[i] == e)
-		return true;
-	}
-	return false;
-}
-/*'上海市省','安徽省','浙江省','江苏省',*/
-var proArray = ['广东省','福建省','广西省','海南省','湖南省','江西省'];
-comm.delCookie('locationWap');
-comm.delCookie('locationWap',1);
+		<!-- seo 信息 -->
+		<title>日产_日产专题_太平洋汽车网</title>
+		<meta name="keywords" content="日产，日产专题，太平洋汽车专题" />
+		<meta name="description" content="太平洋汽车网为您提供专业权威的日产专题报道，了解日产汽车最新动态，更多精彩资讯内容，尽在太平洋汽车网。" />
 
-Location.init(function(data){
-	console.log(data)
-	if(!data.proCode){
-		alert('获取不到定位信息')
-	}else if(proArray.in_array(data.pro)){
-		
-					
-						window.location.replace('http://www1.pcauto.com.cn/zt/wap/gz20180208/bmw/game.html')
-		
-		
-	
-	}else{
-		alert('您不在活动参与地区')
-		// $.getJSON('https://play9.pcauto.com.cn/auto180116/action/jump.jsp?t='+new Date().getTime()+'&callback=?', {}, function(data, textStatus) {
+		<!-- qq传链接抓取信息 -->
+		<meta itemprop="image" content="http://www1.pcauto.com.cn/zt/share/share_logo.jpg">
+		<meta itemprop="name" content="日产_日产专题_太平洋汽车网">
 
-		// });
-		 window.location.replace('http://www.bmw.com.cn/zh/index.html');
-	}
-},true);
+		<!-- 专题设计和制作 -->
+		<meta name="Author" content="guanyelin_gz chenwanmin_gz">
 
-</script>
-</body>
+		<!-- 公用重置样式 -->
+		<link href="//js.3conline.com/pcauto/common/css/zt_base.2.0.css" rel="stylesheet" type="text/css" />
+
+		<!-- 自定义样式区域 -->
+		<link rel="stylesheet" href="css/index.min.css">
+		<style>
+			/*以下样式用于专题背景很复杂的情况，去除底部的背景，使底部风格和页面统一，注意要将此移到外链文件中*/
+			/* footer */
+			/*  
+body .g-footer .gft-links,
+body .g-footer .gft-links a{ color:#000;}
+body .g-footer .gft-copyRight,
+body .g-footer .gft-copyRight a{ color:#000;} 
+*/
+		</style>
+		<!--[if IE 6]><script>document.execCommand("BackgroundImageCache", false, true)</script><![endif]-->
+	</head>
+
+	<body>
+		<!-- 广告头 -->
+		<script>
+			if(!window._addIvyID) document.write("<scr" + "ipt src='//www.pconline.com.cn/_hux_/auto/default/index.js'><\/scr" + "ipt>");
+		</script>
+
+		<!--计数器　SSI 上线生效 S-->
+		<script>
+			window._common_counter_code_ = "channel=5909";
+			window._common_counter_uuid_ = "";
+			window._common_counter_from_ = "cms"; // 如果是cms页面则填cms，非cms页面可为空或者忽略该参数
+			<!--#include virtual="/global_ssi/pcauto/count/index.html"-->
+		</script>
+		<!--计数器　SSI 上线生效 E-->
+
+		<!--公共头部 SSI 上线生效 S-->
+		<!--#include virtual="/global_ssi/pcauto/utf8/zt_navibar/index.html" -->
+		<!--公共头部 SSI 上线生效 E-->
+
+		<!-- 专题内容区域 S -->
+		<div class="g-doc">
+			<div class="area area1">
+				<div class="inner"></div>
+			</div>
+			<div class="area area2">
+				<div class="inner">
+					<input type="text" class="iname" placeholder="请输入姓名"/>
+					<input type="text" class="iphone" placeholder="请输入电话"/>
+					<select class="ipro" name="">
+						<option value="">请选择省份</option>
+					</select>
+					<select class="icity" name="">
+						<option value="">请选择城市</option>
+					</select>
+					<select class="icar" name="">
+						<option value="">请选择意向车型</option>
+					</select>
+					<select class="idel" name="">
+						<option value="">请选择经销商</option>
+					</select>
+					<select class="itime" name="">
+						<option value="">预约购车时间</option>
+					</select>
+					<div class="statement">
+						<label><input  class="checkbox" type="checkbox" checked="checked" name="isAgree" value="">我同意</label>
+						<a href="http://www1.pcauto.com.cn/zt/gz20171127/declare/pc.html" target="_blank">《个人信息保护声明》</a>
+					</div>
+					<div class="submitbtn"></div>
+
+				</div>
+			</div>
+			<div class="area area3">
+				<div class="inner">
+					<div class="slider">
+						<ul>
+							<li>
+								<img src="../../../bmwh5/img/banner_1x.jpg"/>
+							</li>
+							<li>
+								<img src="../../../bmwh5/img/banner_1x.jpg"/>
+							</li>
+							<li>
+								<img src="../../../bmwh5/img/banner_1x.jpg"/>
+							</li>
+						</ul>
+					</div>
+					<div class="ctrlbox">
+						<div class="btn prev"></div>
+						<div class="btn next"></div>
+					</div>
+				</div>
+			</div>
+			<div class="area area4">
+				<div class="inner">
+					<ul>
+						<li>
+							<span class="delname">111</span>
+							<span class="deladdresss">111</span>
+							<span class="deladdphone">111</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- 专题内容区域 E -->
+
+		<!--页面脚本区S-->
+		<!--所有页面用到的js脚本都必须放到此位置，包括外链js和内嵌js-->
+		<script src="//js.3conline.com/min/temp/v1/lib-jquery1.10.2.js"></script>
+		<script src="//js.3conline.com/min/temp/v1/dpl-jquery.slide.js"></script>
+		<script src="//survey.pcauto.com.cn/auto/js/checkSurvey.js" charset="gb2312"></script>
+		<script src="//js.3conline.com/js/ztlib/hdpop.js"></script>
+		<script src="js/index.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--页面脚本区E-->
+		<script type="text/javascript">
+			$('.submitbtn').click(function  () {
+				alert(1)
+			})
+		</script>
+
+		<!-- 公共底部 SSI 上线生效 S -->
+		<!--#include virtual="/global_ssi/pcauto/utf8/footer/index.html" -->
+		<!-- 公共底部 SSI 上线生效 E -->
+
+		<!-- 公共底部js版，本地测试时可以用，上线建议删除或注释掉 -->
+		 <!--<script src="//www.pcauto.com.cn/global/footer/index.html" id="jsFoot" class=" defer" charset="gbk"></script>--> 
+
+		<!-- 广告尾 -->
+		<script>
+			_submitIvyID();
+		</script>
+	</body>
+
 </html>

@@ -85,6 +85,9 @@ gulp.task('css:dev', function() {
 			'spriteSheet': src.images + 'spritesheet.png',
 			'pathToSpriteSheetFromCSS': '../images/spritesheet.png'
 		})))
+		.pipe(base64({
+			maxImageSize: 8*1024
+		}))
 		.pipe(cssAutoPerfix())
 		.pipe(gulp.dest(src.css)) //输出一个未压缩版本
 
