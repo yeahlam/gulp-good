@@ -37,7 +37,7 @@ var ifcombinejs = false; //是否合并JS
 var ifcombindcss = false; //是否合并CSS
 var ifmakeSpriter = false; //是否制作雪碧图
 var ifrev = false; //是否打开版本管理
-
+var ifbase64=false;//是否打开base64转码
 /*************************开发模式*************************/
 
 // 开发模式下静态服务器
@@ -85,9 +85,9 @@ gulp.task('css:dev', function() {
 			'spriteSheet': src.images + 'spritesheet.png',
 			'pathToSpriteSheetFromCSS': '../images/spritesheet.png'
 		})))
-		.pipe(base64({
+		.pipe(gulpif(ifbase64, base64({
 			maxImageSize: 8*1024
-		}))
+		})))
 		.pipe(cssAutoPerfix())
 		.pipe(gulp.dest(src.css)) //输出一个未压缩版本
 
